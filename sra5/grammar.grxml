@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE grammar PUBLIC "-//W3C//DTD GRAMMAR 1.0//EN"
+                "grammar.dtd">
+<!-- the default grammar language is FR  -->
+<grammar  version="1.0"
+          mode ="voice"
+          xmlns="http://www.w3.org/2001/06/grammar"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.w3.org/2001/06/grammar
+                              grammar.xsd"
+          xml:lang="fr-FR" root="answer" tag-format="semantics/1.0">
+      
+
+  <rule id="answer" scope="public"> 
+    <one-of>  
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#forme"/>
+      <ruleref uri="#couleur"/>
+      <ruleref uri="#lieu"/>
+      <tag> out = rules.action.action + ":" + rules.forme.forme +  ":" + rules.couleur.couleur + ":" + rules.lieu.lieu</tag>
+      </item>
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#forme"/>
+      <ruleref uri="#lieu"/>
+      <ruleref uri="#couleur"/>
+      <tag> out = rules.action.action + ":" + rules.forme.forme +  ":" + rules.couleur.couleur + ":" + rules.lieu.lieu</tag>
+      </item>
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#forme"/>
+      <tag> out = rules.action.action + ":" + rules.forme.forme +  ":None:None"</tag>
+      </item>
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#forme"/>
+      <ruleref uri="#couleur"/>
+      <tag> out = rules.action.action + ":" + rules.forme.forme +  ":" + rules.couleur.couleur + ":None"</tag>
+      </item>
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#forme"/>
+      <ruleref uri="#lieu"/>
+      <tag> out = rules.action.action + ":" + rules.forme.forme +  ":None:" + rules.lieu.lieu</tag>
+      </item>
+      <item>
+      <ruleref uri="#action"/>
+      <ruleref uri="#lieu"/>
+      <tag> out = rules.action.action + ":None:None:" + rules.lieu.lieu</tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="action">
+    <one-of>
+      <item>creer<tag> out.action = "cree"; </tag></item>
+      <item>crée<tag> out.action = "cree"; </tag></item>
+      <item>dessiner<tag> out.action = "cree"; </tag></item>
+      <item>deplacer<tag> out.action = "deplacer"; </tag></item>
+      <item>bouger<tag> out.action = "deplacer"; </tag></item>
+      <item>met<tag> out.action = "deplacer"; </tag></item>
+      <item>mettre<tag> out.action = "deplacer"; </tag></item>
+      <item>supprimer<tag> out.action = "supprimer"; </tag></item>
+      <item>effacer<tag> out.action = "supprimer"; </tag></item>
+    </one-of>
+    
+  </rule>
+  <rule id="forme">
+    <one-of>
+      <item>cette forme <tag> out.forme = "None"; </tag></item>
+      <item>cercle <tag> out.forme = "cercle"; </tag> </item>
+      <item>triangle <tag> out.forme = "triangle"; </tag> </item>
+      <item>losange <tag> out.forme = "losange"; </tag></item>
+      <item>rectangle <tag> out.forme = "rectangle"; </tag></item>
+    </one-of>
+  </rule>
+  <rule id="lieu">
+    <one-of>
+      <item>ca</item>
+      <item>ici</item>
+      <item>là</item>
+    </one-of>
+    <tag> out.lieu = "ici"; </tag>
+  </rule>
+  <rule id="couleur">
+    <one-of>
+      <item>rouge <tag> out.couleur = "rouge"; </tag></item>
+      <item>vert <tag> out.couleur = "vert"; </tag></item>
+      <item>bleu <tag> out.couleur = "bleu"; </tag> </item>
+    </one-of>
+  </rule>
+</grammar>
